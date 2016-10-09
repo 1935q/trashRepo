@@ -9,14 +9,17 @@
       Gecko.GeckoPreferences.User["network.proxy.socks_port"] = Int32.Parse(args[1]);
       Gecko.GeckoPreferences.User["network.proxy.socks_version"] = 5;
   }
+
+//Delete cookie in gecko c#
   nsICookieManager CookieMan;
   CookieMan = Xpcom.GetService<nsICookieManager>("@mozilla.org/cookiemanager;1");
   CookieMan = Xpcom.QueryInterface<nsICookieManager>(CookieMan);
   CookieMan.RemoveAll();
-
+//Deleet all history in gecko C#
   nsIBrowserHistory historyMan = Xpcom.GetService<nsIBrowserHistory>(Gecko.Contracts.NavHistoryService);
   historyMan = Xpcom.QueryInterface<nsIBrowserHistory>(historyMan);
   historyMan.RemoveAllPages();
+
   string referrer;
   if (args.Length > 2)
       referrer = WebUtility.UrlDecode( args[2] );
@@ -38,6 +41,8 @@
   {
       url = "ylx-4.com/fullpage.php?section=General&pub=751191&ga=g";
   }
+
+//Set Referer in gecko C#
   //GeckoMIMEInputStream strea = new GeckoMIMEInputStream();
   Gecko.IO.MimeInputStream strea = MimeInputStream.Create();
   if ( referrer != "" )
